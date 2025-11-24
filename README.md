@@ -8,26 +8,13 @@ Repo with python script to automate the restart a Vodafone Ultrahub 7 router
 pip3 install -r requirements.txt
 ```
 
-2. Install Chrome and ChromeDriver:
-```
-# On Ubuntu/Debian
-sudo apt update
-sudo apt install chromium-browser chromium-chromedriver
-
-# On macOS with Homebrew
-brew install chromedriver
-
-# On RHEL/CentOS/Fedora
-sudo dnf install chromium chromium-chromedriver
-```
-
-3. Configure the script:
+2. Configure the script:
 - Edit the script and replace `YOUR_ROUTER_PASSWORD_HERE` with your actual router password
 - Edit the script and replace `192.168.1.1` with your actual router IP address
 - Adjust `LOG_FILE` path as needed
 - Make the script executable: `chmod +x vodafone_restart.py`
 
-4. Test the script:
+3. Test the script:
 ```
 python3 vodafone_restart.py
 ```

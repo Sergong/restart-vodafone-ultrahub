@@ -16,6 +16,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.chrome.service import Service
 from selenium.common.exceptions import TimeoutException, WebDriverException
+from webdriver_manager.chrome import ChromeDriverManager
 
 # Configuration
 ROUTER_URL = "http://192.168.1.1"
@@ -49,8 +50,11 @@ def setup_driver():
     chrome_options.add_experimental_option('excludeSwitches', ['enable-logging'])
     
     try:
-        driver = webdriver.Chrome(options=chrome_options)
+        # Use webdriver-manager to automatically download and manage ChromeDriver
+        service = Service(ChromeDriverManager().install())
+        driver = webdriver.Chrome(service=service, options=chrome_options)
         driver.set_page_load_timeout(TIMEOUT)
+        logger.info("Chrome WebDriver initialized successfully")
         return driver
     except WebDriverException as e:
         logger.error(f"Failed to initialize Chrome driver: {e}")
@@ -191,7 +195,7 @@ def main():
         
         logger.info("=" * 70)
         logger.info(f"Router restart completed successfully in {duration:.2f} seconds")
-        logger.info("Router is now rebooting. It may take 2-3 minutes to come back online.")
+        logger.info("Router is now rebooting. It will take 5-10 minutes to come back online.")
         logger.info("=" * 70)
         
     except Exception as e:
@@ -206,4 +210,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-

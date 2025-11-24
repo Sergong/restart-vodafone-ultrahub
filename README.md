@@ -48,3 +48,25 @@ python3 vodafone_restart.py
 # Restart every 6 hours
 0 */6 * * * /usr/bin/python3 /path/to/vodafone_restart.py
 ```
+
+
+## Setup using VENV (likely required in newer Ubuntu setups)
+
+```
+# Create project directory by cloning this repo
+cd ~/restart-vodafone-ultrahub
+
+# Create virtual environment (recommended)
+python3 -m venv venv
+source venv/bin/activate
+
+# Install dependencies
+pip3 install -r requirements.txt
+
+# Test the script
+python vodafone_restart.py
+
+# Add to crontab with full paths
+crontab -e
+# Add: 0 1 1-7 * 0 /home/yourusername/restart-vodafone-ultrahub/venv/bin/python3 /home/yourusername/restart-vodafone-ultrahub/vodafone_restart.py >> /var/log/vodafone_router_cron.log 2>&1
+```
